@@ -30,6 +30,7 @@
         android:layout_marginTop="48dp">
 
         <EditText
+            android:id="@+id/et_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -37,17 +38,11 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="4dp"
-            android:hint="Email/Acount"
-            android:id="@+id/et_account"
+            android:hint="请输入账户名或邮箱"
             android:inputType="text"
             android:maxLines="1" />
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="4dp"
-            android:src="@drawable/ic_baseline_person_outline_24" />
+
 
 
     </RelativeLayout>
@@ -60,22 +55,17 @@
         android:layout_height="45dp"
         android:layout_marginTop="10dp">
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="4dp"
-            android:src="@drawable/ic_baseline_lock_24" />
+
 
         <EditText
-            android:id="@+id/et_pwd"
+            android:id="@+id/register_password1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="4dp"
-            android:hint="Password"
+            android:hint="请输入密码"
             android:inputType="textPassword"
             android:maxLines="1" />
 
@@ -94,30 +84,23 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_marginTop="16dp">
 
-        <CheckBox
-            android:id="@+id/cb_remember_pwd"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/register_password2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="8dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
             android:layout_marginBottom="4dp"
-            android:text="Remember Password"
-            android:textColor="@color/black" />
+            android:hint="请再次输入密码认证"
+            android:inputType="text"
+            android:maxLines="1" />
 
-        <TextView
-            android:id="@+id/tv_sign_up"
-            android:text="Sign up"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/cb_remember_pwd"
-            android:layout_marginEnd="8dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -135,7 +118,7 @@
 
             android:layout_marginTop="32dp"
             android:layout_marginRight="10dp"
-            android:text="Login"
+            android:text="注册"
             android:textSize="20dp"
             android:textColor="@color/white" />
 
