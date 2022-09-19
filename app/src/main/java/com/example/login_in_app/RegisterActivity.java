@@ -1,11 +1,19 @@
 package com.example.login_in_app;
 
 
+import static java.lang.Character.getType;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,10 +32,165 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class RegisterActivity {
+public class RegisterActivity extends AppCompatActivity{
+
+    private final Gson gson = new Gson();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 这里写用户对应的布局
+        setContentView(R.layout.activity_register);
+        Button register_button = findViewById(R.id.bt_register);
+        register_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            //在这里进行两次密码是否相同的验证
+            EditText password1 = findViewById(R.id.register_password1);
+            EditText password2 = findViewById(R.id.register_password2);
+            String str1 = "ll";
+            String str2="ee";
+            password1.setText(str1);
+            password2.setText(str2);
+            if(str1==str2)
+            {
+                post();
+            }
+            else
+            {
+                Toast.makeText(RegisterActivity.this,"两次输入的密码不一致",Toast.LENGTH_SHORT).show();
+            }
+            }
+
+        });
+    }
+
+    private void post(){
+        new Thread(() -> {
+
+            // url路径
+            String url = "http://47.107.52.7:88/member/sign/user/register";
+
+            // 请求头
+            Headers headers = new Headers.Builder()
+                    .add("Accept", "application/json, text/plain, */*")
+                    .add("appId", "用户所申请的应用ID")
+                    .add("appSecret", "用户所申请的应用密钥")
+                    .add("Content-Type", "application/json")
+                    .build();
+
+            // 请求体，在这里获取账户名密码还有身份，身份用数字零和一表示
+            // PS.用户也可以选择自定义一个实体类，然后使用类似fastjson的工具获取json串
+            Map<String, Object> bodyMap = new HashMap<>();
+            EditText password = findViewById(R.id.register_password1);
+            EditText user=findViewById(R.id.register_account);
+            String pwd="pwd";
+            String admin="admin";
+            password.setText(pwd);
+            user.setText(admin);
 
 
+            RadioGroup groupSelect = findViewById(R.id.radioGroup1);
+            int flag=0;//只有零和一
+            for(int i = 0 ;i < groupSelect.getChildCount();i++){
+                RadioButton rb = (RadioButton)groupSelect.getChildAt(i);
+                if(rb.isChecked()){
+                    //循环判断是哪个单选框被选择了
+                    System.out.println("被选取的按钮是："+rb);
+                    flag=i;  //职业选择就是零和一
+                    System.out.println(getType(flag));
+                    break;
+                }
+            }
+            //将获取到的参数存入map
+            bodyMap.put("password", pwd);
 
+            bodyMap.put("roleId",flag);
+            bodyMap.put("userName", admin);
+            System.out.println("传入参数没有问题");
+            // 将Map转换为字符串类型加入请求体中
+            String body = gson.toJson(bodyMap);
+
+            MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
+
+            //请求组合创建
+            Request request = new Request.Builder()
+                    .url(url)
+                    // 将请求头加至请求中
+                    .headers(headers)
+                    .post(RequestBody.create(MEDIA_TYPE_JSON, body))
+                    .build();
+            try {
+                OkHttpClient client = new OkHttpClient();
+                //发起请求，传入callback进行回调
+                client.newCall(request).enqueue(callback);
+            }catch (NetworkOnMainThreadException ex){
+                ex.printStackTrace();
+            }
+        }).start();
+    }
+
+    /**
+     * 回调
+     */
+    private final Callback callback = new Callback() {
+        @Override
+        public void onFailure(@NonNull Call call, IOException e) {
+            //TODO 请求失败处理
+            e.printStackTrace();
+        }
+        @Override
+        public void onResponse(@NonNull Call call, Response response) throws IOException {
+            //TODO 请求成功处理
+            Type jsonType = new TypeToken<ResponseBody<Object>>(){}.getType();
+            // 获取响应体的json串
+            String body = response.body().string();
+            Log.d("info", body);
+            // 解析json串到自己封装的状态
+            ResponseBody<Object> dataResponseBody = gson.fromJson(body,jsonType);
+            Log.d("info", dataResponseBody.toString());
+        }
+    };
+
+    /**
+     * http响应体的封装协议
+     * @param <T> 泛型
+     */
+    public static class ResponseBody <T> {
+
+        /**
+         * 业务响应码
+         */
+        private int code;
+        /**
+         * 响应提示信息
+         */
+        private String msg;
+        /**
+         * 响应数据
+         */
+        private T data;
+
+        public ResponseBody(){}
+
+        public int getCode() {
+            return code;
+        }
+        public String getMsg() {
+            return msg;
+        }
+        public T getData() {
+            return data;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "ResponseBody{" +
+                    "code=" + code +
+                    ", msg='" + msg + '\'' +
+                    ", data=" + data +
+                    '}';
+        }
+    }
 
 
 }
