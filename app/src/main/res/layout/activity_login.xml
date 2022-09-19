@@ -30,6 +30,7 @@
         android:layout_marginTop="48dp">
 
         <EditText
+            android:id="@+id/et_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -37,8 +38,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="4dp"
-            android:hint="Email/Acount"
-            android:id="@+id/et_account"
+            android:hint="账号名或邮箱"
             android:inputType="text"
             android:maxLines="1" />
 
@@ -75,7 +75,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="4dp"
-            android:hint="Password"
+            android:hint="密码"
             android:inputType="textPassword"
             android:maxLines="1" />
 
@@ -105,19 +105,19 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="4dp"
-            android:text="Remember Password"
+            android:text="记住密码"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_sign_up"
-            android:text="Sign up"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/cb_remember_pwd"
-            android:layout_marginEnd="8dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:text="注册"
+            android:textColor="@color/black" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -135,9 +135,9 @@
 
             android:layout_marginTop="32dp"
             android:layout_marginRight="10dp"
-            android:text="Login"
-            android:textSize="20dp"
-            android:textColor="@color/white" />
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
 
     </RelativeLayout>
