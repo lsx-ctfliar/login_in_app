@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         final ImageView ivPwdSwitch= findViewById(R.id.iv_pwd_switch);
         etPwd = findViewById(R.id.et_pwd);
         Button btLogin = findViewById(R.id.bt_login);
+        Button btRegister=findViewById(R.id.bt_register);
         etAccount=findViewById(R.id.et_account);
         cbRememberPwd = findViewById(R.id.cb_remember_pwd);
 
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         String rememberPasswordkey = getResources().getString(R.string.login_remember_password);
 
 
+        //记住密码
         SharedPreferences spFile = getSharedPreferences(
                 spFileName,
                 MODE_PRIVATE);
@@ -61,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
         cbRememberPwd.setChecked(rememberPassword);
 
+        //设置密码可不可见
         ivPwdSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
+        //转到主页面
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +126,16 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }
+            }
+        });
+
+        //转到注册界面
+        btRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+//                    intent.putExtra(MESSAGE_STRING,message);
+                startActivity(intent);
             }
         });
     }
