@@ -5,6 +5,8 @@ import static java.lang.Character.getType;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
@@ -53,6 +55,10 @@ public class RegisterActivity extends AppCompatActivity{
             if(str1==str2)
             {
                 post();
+                //当注册结束之后，跳转到登陆界面
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+//                    intent.putExtra(MESSAGE_STRING,message);
+                startActivity(intent);
             }
             else
             {
