@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -43,19 +44,22 @@ public class RegisterActivity extends AppCompatActivity{
         // 这里写用户对应的布局
         setContentView(R.layout.activity_register);
         Button register_button = findViewById(R.id.bt_register);
+        TextView back =findViewById(R.id.back);
         register_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             //在这里进行两次密码是否相同的验证
             EditText password1 = findViewById(R.id.register_password1);
             EditText password2 = findViewById(R.id.register_password2);
-            String str1 = "ll";
-            String str2="ee";
-            password1.setText(str1);
-            password2.setText(str2);
-            if(str1==str2)
+
+            String str1 = password1.getText().toString();
+            String str2=  password2.getText().toString();
+
+
+            if(str1.equals(str2))
             {
                 post();
                 //当注册结束之后，跳转到登陆界面
+                Log.d("网络获取", "onClick: 没有问题");
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
 //                    intent.putExtra(MESSAGE_STRING,message);
                 startActivity(intent);
@@ -66,6 +70,16 @@ public class RegisterActivity extends AppCompatActivity{
             }
             }
 
+        });
+
+        //返回登录界面
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+//                    intent.putExtra(MESSAGE_STRING,message);
+                startActivity(intent);
+            }
         });
     }
 
@@ -78,8 +92,8 @@ public class RegisterActivity extends AppCompatActivity{
             // 请求头
             Headers headers = new Headers.Builder()
                     .add("Accept", "application/json, text/plain, */*")
-                    .add("appId", "用户所申请的应用ID")
-                    .add("appSecret", "用户所申请的应用密钥")
+                    .add("appId", "0209897961f94b7d94d40b6a754a7057")
+                    .add("appSecret", "586652ad90d5c1de246c58715f1fd1c18ff18")
                     .add("Content-Type", "application/json")
                     .build();
 
@@ -92,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity{
             String admin="admin";
             password.setText(pwd);
             user.setText(admin);
+            Log.d("填写请求头", "post: 没有问题");
 
 
             RadioGroup groupSelect = findViewById(R.id.radioGroup1);

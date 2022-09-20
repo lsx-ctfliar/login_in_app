@@ -32,7 +32,7 @@
         <EditText
             android:id="@+id/register_account"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:layout_marginStart="48dp"
@@ -81,7 +81,7 @@
         <EditText
             android:id="@+id/register_password2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:layout_marginStart="48dp"
@@ -125,7 +125,14 @@
 
     </RadioGroup>
 
-
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="260dp"
+            android:layout_marginTop="25dp"
+            android:clickable="true"
+            android:text="已有帐号登录" />
 
     </RelativeLayout>
 

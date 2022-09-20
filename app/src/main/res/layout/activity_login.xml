@@ -32,7 +32,7 @@
         <EditText
             android:id="@+id/et_account"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="51dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:layout_marginStart="48dp"
@@ -116,6 +116,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="8dp"
+            android:clickable="true"
             android:text="注册"
             android:textColor="@color/black" />
     </RelativeLayout>

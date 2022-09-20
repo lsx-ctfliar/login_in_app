@@ -6,7 +6,7 @@
     </string>
     <string name="login_password">login_password
     </string>
-    <srtring name="register">注册</srtring>
+
     <string name="login_remember_password">login_remember_password
     </string>
 </resources>
