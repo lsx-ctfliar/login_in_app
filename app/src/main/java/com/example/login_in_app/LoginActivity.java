@@ -238,6 +238,13 @@ public class LoginActivity extends AppCompatActivity {
             Type jsonType = new TypeToken<ResponseBody<Object>>(){}.getType();
             // 获取响应体的json串
             String body = response.body().string();
+
+
+            //通过分割符和索引找到，角色 id
+            String roleId=body.split(",")[5].split(":")[1];
+            String q=roleId.getClass().toString();
+            Log.d("找到的位置",roleId);
+            Log.d("类型：", q);
             Log.d("info", body);
             // 解析json串到自己封装的状态
 
@@ -252,9 +259,21 @@ public class LoginActivity extends AppCompatActivity {
             if(message.equals("登录成功"))
             {
                 System.out.println("登录匹配成功");
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                //通过获取到的  roleId决定跳转到老师界面还是用户界面
+                String flag="0";
+                if(roleId.equals("0"))
+                {
+                    //字符串0是学生，1是老师
+                    Intent intent = new Intent(LoginActivity.this,StudentMainActivity.class);
 ////                    intent.putExtra(MESSAGE_STRING,message);
-                startActivity(intent);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(LoginActivity.this,TeacherMainActivity.class);
+////                    intent.putExtra(MESSAGE_STRING,message);
+                    startActivity(intent);
+                }
             }
             else
             {
