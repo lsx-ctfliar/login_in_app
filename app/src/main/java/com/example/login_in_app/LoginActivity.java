@@ -1,5 +1,4 @@
 package com.example.login_in_app;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,15 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Headers;
@@ -40,6 +36,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import androidx.annotation.LongDef;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -231,6 +229,8 @@ public class LoginActivity extends AppCompatActivity {
         public void onFailure(@NonNull Call call, IOException e) {
             //TODO 请求失败处理
             e.printStackTrace();
+            Toast.makeText(LoginActivity.this,"密码错误或用户不存在",Toast.LENGTH_SHORT).show();
+
         }
         @Override
         public void onResponse(@NonNull Call call, Response response) throws IOException {
@@ -244,9 +244,24 @@ public class LoginActivity extends AppCompatActivity {
             ResponseBody<Object> dataResponseBody = gson.fromJson(body,jsonType);
             Log.d("info", dataResponseBody.toString());
             //跳转到主页面
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            //可以通过对象的属性值方法，获取返回的需要的信息
+            String message=dataResponseBody.msg;
+
+            System.out.println("返回值:"+message);
+            //java的比较，==只能用来比较地址，，比较字符串变量的值要用equals()函数
+            if(message.equals("登录成功"))
+            {
+                System.out.println("登录匹配成功");
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 ////                    intent.putExtra(MESSAGE_STRING,message);
-                    startActivity(intent);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(LoginActivity.this,"密码错误或用户不存在",Toast.LENGTH_SHORT).show();
+
+            }
+
 
         }
     };

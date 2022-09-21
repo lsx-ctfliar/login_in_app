@@ -102,10 +102,11 @@ public class RegisterActivity extends AppCompatActivity{
             Map<String, Object> bodyMap = new HashMap<>();
             EditText password = findViewById(R.id.register_password1);
             EditText user=findViewById(R.id.register_account);
-            String pwd="pwd";
-            String admin="admin";
-            password.setText(pwd);
-            user.setText(admin);
+            String pwd="";
+            String admin="";
+            pwd=password.getText().toString();
+            admin=user.getText().toString();
+            System.out.println(pwd+"和"+admin);
             Log.d("填写请求头", "post: 没有问题");
 
 
@@ -127,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity{
             bodyMap.put("roleId",flag);
             bodyMap.put("userName", admin);
             System.out.println("传入参数没有问题");
+            System.out.println(bodyMap.get("roleId"));
             // 将Map转换为字符串类型加入请求体中
             String body = gson.toJson(bodyMap);
 
