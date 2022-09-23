@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "login_in_app"
+rootProject.name = "Picture Sharing"
 include ':app'
