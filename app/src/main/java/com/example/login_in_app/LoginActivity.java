@@ -264,15 +264,55 @@ public class LoginActivity extends AppCompatActivity {
                 if(roleId.equals("0"))
                 {
                     //字符串0是学生，1是老师
-                    Intent intent = new Intent(LoginActivity.this,StudentMainActivity.class);
+                    //根据业务逻辑，要检查是否完善信息，没有完善就跳到信息修改页面，完善了的直接跳到学生主页
+
+                    String realName=body.split(",")[6].split(":")[1];
+                    String idNumber=body.split(",")[7].split(":")[1];
+                    String collegeName=body.split(",")[8].split(":")[1];
+                    String phone=body.split(",")[10].split(":")[1];
+                    String avatar=body.split(",")[12].split(":")[1];
+                    String inSchooltime=body.split(",")[11].split(":")[1];
+                    Log.d("个人详细信息", realName+idNumber+collegeName+phone+avatar+inSchooltime);
+                    if(((realName.equals("null") || idNumber.equals("null")||(collegeName.equals("null")||phone.equals("null"))))||(avatar.equals("null")||(inSchooltime.equals("null"))))
+                    {
+                        //任意一个信息为空的时候，直接跳转到个人信息更新页面
+                        Intent intent = new Intent(LoginActivity.this,UpdateMessageActivity.class);
 ////                    intent.putExtra(MESSAGE_STRING,message);
-                    startActivity(intent);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        //信息不为空，直接跳转到学生界面
+                        Intent intent = new Intent(LoginActivity.this,StudentMainActivity.class);
+////                    intent.putExtra(MESSAGE_STRING,message);
+                        startActivity(intent);
+                    }
                 }
                 else
                 {
-                    Intent intent = new Intent(LoginActivity.this,TeacherMainActivity.class);
+                    //先判断是不是完善信息
+
+                    String realName=body.split(",")[6].split(":")[1];
+                    String idNumber=body.split(",")[7].split(":")[1];
+                    String collegeName=body.split(",")[8].split(":")[1];
+                    String phone=body.split(",")[10].split(":")[1];
+                    String avatar=body.split(",")[12].split(":")[1];
+                    String inSchooltime=body.split(",")[11].split(":")[1];
+                    Log.d("个人详细信息", realName+idNumber+collegeName+phone+avatar+inSchooltime);
+                    if(((realName.equals("null") || idNumber.equals("null")||(collegeName.equals("null")||phone.equals("null"))))||(avatar.equals("null")||(inSchooltime.equals("null"))))
+                    {
+                        //任意一个信息为空的时候，直接跳转到个人信息更新页面
+                        Intent intent = new Intent(LoginActivity.this,UpdateMessageActivity.class);
 ////                    intent.putExtra(MESSAGE_STRING,message);
-                    startActivity(intent);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        //信息不为空，直接跳转到学生界面
+                        Intent intent = new Intent(LoginActivity.this,TeacherMainActivity.class);
+////                    intent.putExtra(MESSAGE_STRING,message);
+                        startActivity(intent);
+                    }
                 }
             }
             else

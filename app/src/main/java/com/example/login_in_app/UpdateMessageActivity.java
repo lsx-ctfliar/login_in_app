@@ -55,7 +55,7 @@ public class UpdateMessageActivity extends AppCompatActivity {
             // 请求体
             // PS.用户也可以选择自定义一个实体类，然后使用类似fastjson的工具获取json串
             Map<String, Object> bodyMap = new HashMap<>();
-            bodyMap.put("collegeName", "string");
+            bodyMap.put("collegeName", "");
             bodyMap.put("realName", "string");
             bodyMap.put("gender", true);
             bodyMap.put("phone", "string");
