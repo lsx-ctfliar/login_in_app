@@ -9,11 +9,15 @@
         <entry key="..\:/Gitproject/login_in_app/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Gitproject/login_in_app/app/src/main/res/layout/login_activity.xml" value="0.14322916666666666" />
         <entry key="..\:/Gitproject/login_in_app/app/src/main/res/xml/network_security_config.xml" value="0.16282051282051282" />
-        <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.155" />
+        <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/drawable/shape.xml" value="0.165" />
+        <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/layout/activity_change_one_message.xml" value="0.25" />
+        <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/layout/activity_main.xml" value="0.2509057971014493" />
         <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/layout/activity_register.xml" value="0.335" />
         <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/layout/activity_student_main.xml" value="0.11614583333333334" />
         <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/layout/activity_teacher_main.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/zero/Desktop/android_test/app/src/main/res/layout/activity_update_message.xml" value="0.25" />
       </map>
     </option>
   </component>
