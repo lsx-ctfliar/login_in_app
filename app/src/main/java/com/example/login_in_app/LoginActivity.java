@@ -1,5 +1,8 @@
 package com.example.login_in_app;
 import android.content.Context;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,7 +41,7 @@ import androidx.annotation.LongDef;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
-
+import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
 
     private final Gson gson = new Gson();
@@ -253,6 +256,12 @@ public class LoginActivity extends AppCompatActivity {
             //跳转到主页面
             //可以通过对象的属性值方法，获取返回的需要的信息
             String message=dataResponseBody.msg;
+//            try {
+//                JSONObject jsonObject = new JSONObject(body);
+//                String t= (String) JSONObject.get("id");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
             System.out.println("返回值:"+message);
             //java的比较，==只能用来比较地址，，比较字符串变量的值要用equals()函数
@@ -273,6 +282,8 @@ public class LoginActivity extends AppCompatActivity {
                     String avatar=body.split(",")[12].split(":")[1];
                     String inSchooltime=body.split(",")[11].split(":")[1];
                     Log.d("个人详细信息", realName+idNumber+collegeName+phone+avatar+inSchooltime);
+
+
                     if(((realName.equals("null") || idNumber.equals("null")||(collegeName.equals("null")||phone.equals("null"))))||(avatar.equals("null")||(inSchooltime.equals("null"))))
                     {
                         //任意一个信息为空的时候，直接跳转到个人信息更新页面
@@ -366,4 +377,6 @@ public class LoginActivity extends AppCompatActivity {
                     '}';
         }
     }
+
+
 }

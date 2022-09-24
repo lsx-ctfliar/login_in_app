@@ -170,6 +170,10 @@ public class RegisterActivity extends AppCompatActivity{
             // 解析json串到自己封装的状态
             ResponseBody<Object> dataResponseBody = gson.fromJson(body,jsonType);
             Log.d("info", dataResponseBody.toString());
+            System.out.println(body);
+            String code=body.split(",")[1].split(":")[1];
+            String data=body.split(",")[1].split(":")[1];
+            System.out.println(code);
         }
     };
 
