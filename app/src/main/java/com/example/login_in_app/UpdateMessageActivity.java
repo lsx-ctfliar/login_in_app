@@ -1,14 +1,18 @@
 package com.example.login_in_app;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class UpdateMessageActivity extends AppCompatActivity {
 
     private final Gson gson = new Gson();
+    private AlertDialog dlg;
 
 
     @Override
@@ -44,13 +49,31 @@ public class UpdateMessageActivity extends AppCompatActivity {
 
         //设置图片编辑
 
+        TextView account=findViewById(R.id.UpdateUser);
         //设置点击按钮，编辑昵称信息页面
        ImageView btn1=findViewById(R.id.btn1);
        btn1.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent = new Intent(UpdateMessageActivity.this,ChangeOneMessageActivity.class);
-               startActivity(intent);
+//               Intent intent = new Intent(UpdateMessageActivity.this,ChangeOneMessageActivity.class);
+//               startActivity(intent);
+//               要在同一个activity下面布局`
+               View cut_view = LayoutInflater.from(UpdateMessageActivity.this).inflate(R.layout.activity_change_one_message,null);
+               EditText editor = cut_view.findViewById(R.id.update_account);
+               Button bt_eridotr = cut_view.findViewById(R.id.update_save);
+               bt_eridotr.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       account.setText(editor.getText().toString());
+                       dlg.dismiss();
+                   }
+               });
+               dlg= new AlertDialog.Builder(UpdateMessageActivity.this)
+                       .setView(cut_view)
+                       .create();
+               dlg.show();
+
+
            }
        });
     }
