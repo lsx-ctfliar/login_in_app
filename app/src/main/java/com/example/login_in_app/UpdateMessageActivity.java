@@ -114,6 +114,7 @@ public class UpdateMessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //提交现在修改的数据
+                post();
             }
         });
 
@@ -134,7 +135,7 @@ public class UpdateMessageActivity extends AppCompatActivity {
 
                         public void onClick(DialogInterface dialog, int which) {
                             //修改图片的src,现在按就接口获取的是一个网络图片网址
-                            update_account.setText(inputServer0.getText().toString());
+//                            update_image_kuang.setText(inputServer0.getText().toString());
 
                         }});
 
@@ -181,7 +182,7 @@ public class UpdateMessageActivity extends AppCompatActivity {
                     builder2.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int which) {
-                            update_account.setText(inputServer2.getText().toString());
+                            update_school.setText(inputServer2.getText().toString());
 
                         }});
 
@@ -190,12 +191,24 @@ public class UpdateMessageActivity extends AppCompatActivity {
                 case R.id.btn3:
                     final EditText inputServer3 = new EditText(UpdateMessageActivity.this);
                     AlertDialog.Builder builder3 = new AlertDialog.Builder(UpdateMessageActivity.this);
-                    builder3.setTitle("修改身份类型").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer3)
+                    builder3.setTitle("修改身份类型(学生则设0老师设为1)").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer3)
                             .setNegativeButton("Cancel", null);
                     builder3.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int which) {
-                            update_account.setText(inputServer3.getText().toString());
+                            String flag=inputServer3.getText().toString();
+                            if(flag.equals("0"))
+                            {
+                                update_type.setText("学生");
+
+                            }
+                            else if(flag.equals("1")){
+                                update_type.setText("老师");
+                            }
+                            else
+                            {
+                                update_type.setText("null");
+                            }
 
                         }});
 
@@ -210,7 +223,7 @@ public class UpdateMessageActivity extends AppCompatActivity {
                     builder4.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int which) {
-                            update_account.setText(inputServer4.getText().toString());
+                            update_studentNumber.setText(inputServer4.getText().toString());
 
                         }});
 
@@ -225,7 +238,7 @@ public class UpdateMessageActivity extends AppCompatActivity {
                     builder5.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int which) {
-                            update_account.setText(inputServer5.getText().toString());
+                            update_studentRealname.setText(inputServer5.getText().toString());
 
                         }});
 
@@ -240,7 +253,7 @@ public class UpdateMessageActivity extends AppCompatActivity {
                     builder6.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int which) {
-                            update_account.setText(inputServer6.getText().toString());
+                            update_intime.setText(inputServer6.getText().toString());
 
                         }});
 
@@ -255,7 +268,7 @@ public class UpdateMessageActivity extends AppCompatActivity {
                     builder7.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int which) {
-                            update_account.setText(inputServer7.getText().toString());
+                            update_phone.setText(inputServer7.getText().toString());
 
                         }});
 
@@ -274,6 +287,172 @@ public class UpdateMessageActivity extends AppCompatActivity {
 
 
     }
+
+    private void post(){
+        new Thread(() -> {
+
+            // url路径
+            String url = "http://47.107.52.7:88/member/sign/user/update";
+
+            // 请求头
+            Headers headers = new Headers.Builder()
+                    .add("Accept", "application/json, text/plain, */*")
+                    .add("appId", "6ef49f23efac405a8fdfe71e38b9a085")
+                    .add("appSecret", "65883fce5ceac8eb645848ab991eca8134de1")
+                    .add("Content-Type", "application/json")
+                    .build();
+
+//             请求体
+//             PS.用户也可以选择自定义一个实体类，然后使用类似fastjson的工具获取json串
+            Map<String, Object> bodyMap = new HashMap<>();
+
+            //名字
+            String string1=update_account.getText().toString();
+            System.out.println("username"+string1);
+            bodyMap.put("userName", string1);
+            //大学
+            String string2 = update_school.getText().toString();
+            System.out.println("school"+string2);
+            bodyMap.put("collegeName", string2);
+            //真实姓名
+            String string3=update_studentRealname.getText().toString();
+            System.out.println("realname"+string3);
+            bodyMap.put("realName", string3);
+            //电话号码
+            String string4=update_phone.getText().toString();
+            System.out.println("phone"+string4);
+            bodyMap.put("phone", string4);
+            //学工号
+            String string50= update_studentNumber.getText().toString();
+            int string51=Integer.parseInt(string50);
+            System.out.println("idnumber"+string51);
+
+            bodyMap.put("idNumber", string51);
+            //入学时间
+            bodyMap.put("inSchoolTime", 0);
+            //头像链接
+            bodyMap.put("avatar", "https://images3.alphacoders.com/100/1004744.jpg");
+
+            bodyMap.put("gender", true);
+            //主键必填
+            //0是学生，1是老师
+            String flag2=update_type.getText().toString();
+            if(flag2.equals("学生"))
+            {
+                bodyMap.put("id", 0);
+                System.out.println("匹配到学生");
+
+            }
+            else if(flag2.equals("老师")){
+                bodyMap.put("id", 1);
+                System.out.println("匹配到老师");
+            }
+            else
+            {
+                System.out.println("用户类型错误");
+            }
+
+            bodyMap.put("email", "2305177163");
+
+//             将Map转换为字符串类型加入请求体中
+
+//            Map<String, Object> bodyMap = new HashMap<>();
+//            bodyMap.put("collegeName", "string");
+//            bodyMap.put("realName", "string");
+//            bodyMap.put("gender", true);
+//            bodyMap.put("phone", "string");
+//            bodyMap.put("avatar", "string");
+//            bodyMap.put("id", 0);
+//            bodyMap.put("idNumber", 0);
+//            bodyMap.put("userName", "string");
+//            bodyMap.put("email", "string");
+//            bodyMap.put("inSchoolTime", 0);
+
+            String body = gson.toJson(bodyMap);
+
+            MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
+
+            //请求组合创建
+            Request request = new Request.Builder()
+                    .url(url)
+                    // 将请求头加至请求中
+                    .headers(headers)
+                    .post(RequestBody.create(MEDIA_TYPE_JSON, body))
+                    .build();
+            try {
+                OkHttpClient client = new OkHttpClient();
+                //发起请求，传入callback进行回调
+                client.newCall(request).enqueue(callback);
+            }catch (NetworkOnMainThreadException ex){
+                ex.printStackTrace();
+            }
+        }).start();
+    }
+
+    /**
+     * 回调
+     */
+    private final Callback callback = new Callback() {
+        @Override
+        public void onFailure(@NonNull Call call, IOException e) {
+            //TODO 请求失败处理
+            e.printStackTrace();
+        }
+        @Override
+        public void onResponse(@NonNull Call call, Response response) throws IOException {
+            //TODO 请求成功处理
+            Type jsonType = new TypeToken<ResponseBody<Object>>(){}.getType();
+            // 获取响应体的json串
+            String body = response.body().string();
+            Log.d("info", body);
+            // 解析json串到自己封装的状态
+            ResponseBody<Object> dataResponseBody = gson.fromJson(body,jsonType);
+            Log.d("info", dataResponseBody.toString());
+        }
+    };
+
+    /**
+     * http响应体的封装协议
+     * @param <T> 泛型
+     */
+    public static class ResponseBody <T> {
+
+        /**
+         * 业务响应码
+         */
+        private int code;
+        /**
+         * 响应提示信息
+         */
+        private String msg;
+        /**
+         * 响应数据
+         */
+        private T data;
+
+        public ResponseBody(){}
+
+        public int getCode() {
+            return code;
+        }
+        public String getMsg() {
+            return msg;
+        }
+        public T getData() {
+            return data;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "ResponseBody{" +
+                    "code=" + code +
+                    ", msg='" + msg + '\'' +
+                    ", data=" + data +
+                    '}';
+        }
+    }
+
     }
 
 
