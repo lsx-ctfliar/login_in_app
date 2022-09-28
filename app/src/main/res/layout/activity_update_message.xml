@@ -90,6 +90,7 @@
                 android:textSize="18dp" />
 
             <ImageView
+                android:id="@+id/update_image_btn"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="365dp"
@@ -172,6 +173,7 @@
                 android:textSize="18dp" />
 
             <ImageView
+                android:id="@+id/btn2"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="365dp"
@@ -205,6 +207,7 @@
                 android:textSize="18dp" />
 
             <ImageView
+                android:id="@+id/btn3"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="365dp"
@@ -238,6 +241,7 @@
                 android:textSize="18dp" />
 
             <ImageView
+                android:id="@+id/btn4"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="365dp"
@@ -271,6 +275,7 @@
                 android:textSize="18dp" />
 
             <ImageView
+                android:id="@+id/btn5"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="365dp"
@@ -304,6 +309,7 @@
                 android:textSize="18dp" />
 
             <ImageView
+                android:id="@+id/btn6"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="365dp"
@@ -338,6 +344,7 @@
                 android:textSize="18dp" />
 
             <ImageView
+                android:id="@+id/btn7"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="365dp"
