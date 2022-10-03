@@ -51,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox cbRememberPwd;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -275,17 +277,24 @@ public class LoginActivity extends AppCompatActivity {
                     //字符串0是学生，1是老师
                     //根据业务逻辑，要检查是否完善信息，没有完善就跳到信息修改页面，完善了的直接跳到学生主页
 
-                    String realName=body.split(",")[6].split(":")[1];
-                    String idNumber=body.split(",")[7].split(":")[1];
-                    String collegeName=body.split(",")[8].split(":")[1];
-                    String phone=body.split(",")[10].split(":")[1];
-                    String avatar=body.split(",")[12].split(":")[1];
-                    String inSchooltime=body.split(",")[11].split(":")[1];
-                    Log.d("个人详细信息", realName+idNumber+collegeName+phone+avatar+inSchooltime);
+                    user user = new user();
 
-
-                    if(((realName.equals("null") || idNumber.equals("null")||(collegeName.equals("null")||phone.equals("null"))))||(avatar.equals("null")||(inSchooltime.equals("null"))))
-                    {
+                    System.out.println("登陆的id号：---"+body.split(",")[2].split(":")[2]);
+                    //获取id号和别的信息位置规律不一样
+                    user.setId(body.split(",")[2].split(":")[2]);
+                    user.setId(user.getId().replace("\"",""));
+                    System.out.println("处理后的id号"+user.getId());
+                    user.setUserName(body.split(",")[4].split(":")[1]);
+                    user.setRoleid(body.split(",")[5].split(":")[1]);
+                    user.setRealName(body.split(",")[6].split(":")[1]);
+                    user.setIdNumber(body.split(",")[7].split(":")[1]);
+                    user.setCollegeName(body.split(",")[8].split(":")[1]);
+                    user.setPhone(body.split(",")[10].split(":")[1]);
+                    user.setAvatar(body.split(",")[12].split(":")[1]);
+                    user.setInSchooltime(body.split(",")[11].split(":")[1]);
+                    Log.d("个人详细信息", user.getId()+user.getRealName()+user.getIdNumber()+user.getCollegeName()+user.getPhone()+user.getAvatar()+user.getInSchooltime());
+                    if(((user.getRealName().equals("null") || user.getIdNumber().equals("null")||(user.getCollegeName().equals("null")||user.getPhone().equals("null"))))||(user.getAvatar().equals("null")||(user.getInSchooltime().equals("null"))))
+                {
                         //任意一个信息为空的时候，直接跳转到个人信息更新页面
                         Intent intent = new Intent(LoginActivity.this,UpdateMessageActivity.class);
 ////                    intent.putExtra(MESSAGE_STRING,message);
@@ -303,14 +312,20 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     //先判断是不是完善信息
 
-                    String realName=body.split(",")[6].split(":")[1];
-                    String idNumber=body.split(",")[7].split(":")[1];
-                    String collegeName=body.split(",")[8].split(":")[1];
-                    String phone=body.split(",")[10].split(":")[1];
-                    String avatar=body.split(",")[12].split(":")[1];
-                    String inSchooltime=body.split(",")[11].split(":")[1];
-                    Log.d("个人详细信息", realName+idNumber+collegeName+phone+avatar+inSchooltime);
-                    if(((realName.equals("null") || idNumber.equals("null")||(collegeName.equals("null")||phone.equals("null"))))||(avatar.equals("null")||(inSchooltime.equals("null"))))
+                    user user = new user();
+
+                    System.out.println("登陆的id号：---"+body.split(",")[2].split(":")[2]);
+                    user.setId(body.split(",")[2].split(":")[1]);
+                    user.setUserName(body.split(",")[4].split(":")[1]);
+                    user.setRoleid(body.split(",")[5].split(":")[1]);
+                    user.setRealName(body.split(",")[6].split(":")[1]);
+                    user.setIdNumber(body.split(",")[7].split(":")[1]);
+                    user.setCollegeName(body.split(",")[8].split(":")[1]);
+                    user.setPhone(body.split(",")[10].split(":")[1]);
+                    user.setAvatar(body.split(",")[12].split(":")[1]);
+                    user.setInSchooltime(body.split(",")[11].split(":")[1]);
+                    Log.d("个人详细信息", user.getId()+user.getRealName()+user.getIdNumber()+user.getCollegeName()+user.getPhone()+user.getAvatar()+user.getInSchooltime());
+                    if(((user.getRealName().equals("null") || user.getIdNumber().equals("null")||(user.getCollegeName().equals("null")||user.getPhone().equals("null"))))||(user.getAvatar().equals("null")||(user.getInSchooltime().equals("null"))))
                     {
                         //任意一个信息为空的时候，直接跳转到个人信息更新页面
                         Intent intent = new Intent(LoginActivity.this,UpdateMessageActivity.class);
@@ -377,6 +392,8 @@ public class LoginActivity extends AppCompatActivity {
                     '}';
         }
     }
+
+
 
 
 }

@@ -296,9 +296,10 @@ public class UpdateMessageActivity extends AppCompatActivity {
 
             // 请求头
             Headers headers = new Headers.Builder()
+                    //密钥弄错了，，我真的是服了
                     .add("Accept", "application/json, text/plain, */*")
-                    .add("appId", "6ef49f23efac405a8fdfe71e38b9a085")
-                    .add("appSecret", "65883fce5ceac8eb645848ab991eca8134de1")
+                    .add("appId", "0209897961f94b7d94d40b6a754a7057")
+                    .add("appSecret", "586652ad90d5c1de246c58715f1fd1c18ff18")
                     .add("Content-Type", "application/json")
                     .build();
 
@@ -334,17 +335,27 @@ public class UpdateMessageActivity extends AppCompatActivity {
             bodyMap.put("avatar", "https://images3.alphacoders.com/100/1004744.jpg");
 
             bodyMap.put("gender", true);
+
+            System.out.println(user.getId());
+//            bodyMap.put("createTime","1663675856811");
+//
+//            bodyMap.put("lastUpdateTime","1663675856811");
             //主键必填
             //0是学生，1是老师
+
             String flag2=update_type.getText().toString();
+            //将字符串id转换为数字id
+            int id = Integer.parseInt(user.getId());
             if(flag2.equals("学生"))
             {
-                bodyMap.put("id", 0);
+                bodyMap.put("id", id);
+                System.out.println(user.getId());
                 System.out.println("匹配到学生");
 
             }
             else if(flag2.equals("老师")){
-                bodyMap.put("id", 1);
+                bodyMap.put("id", id);
+                System.out.println(user.getId());
                 System.out.println("匹配到老师");
             }
             else
@@ -408,6 +419,25 @@ public class UpdateMessageActivity extends AppCompatActivity {
             // 解析json串到自己封装的状态
             ResponseBody<Object> dataResponseBody = gson.fromJson(body,jsonType);
             Log.d("info", dataResponseBody.toString());
+            //请求成功之后进行跳转，主页面，根据用户的角色Id决定跳转到的方向
+            if(user.getId().equals("0"))
+            {
+                //0表是是学生
+                //修改完信息之后，直接跳转到学生界面
+                Intent intent = new Intent(UpdateMessageActivity.this,TeacherMainActivity.class);
+////                    intent.putExtra(MESSAGE_STRING,message);
+                startActivity(intent);
+            }
+            else
+            {
+                //修改完信息之后直接跳转到老师界面
+                Intent intent = new Intent(UpdateMessageActivity.this,TeacherMainActivity.class);
+////                    intent.putExtra(MESSAGE_STRING,message);
+                startActivity(intent);
+            }
+
+            //跳转之后要注意的通过用户类的新数据，将个人信息页面的组件进行赋值
+
         }
     };
 
